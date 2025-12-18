@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        /* General Reset */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background:  linear-gradient(135deg, pink, #78bbd7 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* The Card Container */
+        .wish-card {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            background: rgb(12, 12, 12);
+            transition: transform 0.3s ease;
+        }
+
+        .wish-card:hover {
+            transform: scale(1.02);
+        }
+
+        /* --- MEDIA QUERIES (Phone vs Laptop) --- */
+
+        /* LAPTOP STYLE (Screens wider than 768px) */
+        @media (min-width: 769px) {
+            .wish-card {
+                width: 350px;
+                height: 500px;
+            }
+            .instruction-text::after { content: "Click to reveal your surprise"; }
+        }
+
+        /* PHONE STYLE (Screens smaller than 768px) */
+        @media (max-width: 768px) {
+            .wish-card {
+                width: 85vw; /* 85% of screen width */
+                height: 60vh; /* 60% of screen height */
+            }
+            .instruction-text::after { content: "Tap to reveal your surprise"; }
+        }
+
+        /* The Wish Content (Bottom Layer) */
+        .wish-content {
+            position: absolute;
+            inset: 0; /* fills the whole card */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            background: #000608 ;
+        }
+
+        .wish-content h2 {
+            color:rgb(65, 176, 236);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            /* Floating Animation */
+            animation: float 2.5s ease-in-out infinite;
+        }
+
+        .wish-content p {
+            color:rgb(192, 240, 255);
+            line-height: 1.5;
+        }
+
+        /* The Photo Overlay (Top Layer) */
+        .photo-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.8s;
+        }
+
+        .photo-overlay img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Label on the photo */
+        .instruction-label {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: rgb(249, 171, 232);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* REVEAL ACTION: When clicked or tapped */
+        /* Works on click (Desktop) and touch (Mobile) */
+        .wish-card:focus .photo-overlay,
+        .wish-card:active .photo-overlay {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        /* Floating Animation Keyframes */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        .audio{
+            display:none;
+           
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wish-card" tabindex="0">
+        
+        <div class="wish-content">
+            <h2>All the best for your exam! ✍️</h2>
+            <p>I know you have worked hard. You are going to shine today! Call me once you finish. ❤️</p>
+        </div>
+
+        <div class="photo-overlay">
+            <img src="img/photo.jpg" alt="Her Photo">
+            <div class="instruction-label instruction-text">
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
